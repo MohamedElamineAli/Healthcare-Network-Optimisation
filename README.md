@@ -50,14 +50,8 @@ Before you begin, make sure you have Anaconda installed on your system. If not, 
     - Click "Open" to import the environment.
 
 3. **Activate the Environment:**
-
     - Once imported, find the newly created environment in the list.
-    - Click on the environment name and select "Open Terminal" to activate the environment.
-    - In the terminal window, type:
-    
-        ```bash
-        conda activate <environment-name>
-        ```
+    - Click on the environment name to activate it
 
 ## Additional Notes
 - Remember to deactivate the environment when you're finished using it:
