@@ -90,7 +90,7 @@ def Astar(G, sources, paths=None, target=None):
 
 
 
-def UCS(G, sources, paths=None, target=None):
+def UCS(G, source, paths=None, targets=None):
     G_succ = G._adj  # adjacency list of the graph for speed-up
 
     push = heappush  # alias for heappush function
@@ -101,11 +101,9 @@ def UCS(G, sources, paths=None, target=None):
     # fringe is heapq with 3-tuples (distance, c, node)
     # use the count c to avoid comparing nodes (may not be able to)
     c = count()  # counter for nodes
-    frontier = []  # priority queue for fringe nodes
+    frontier = []  # priority queue
 
-    for source in sources:
-        explored_set[source] = 0  # initialize distance to source itself as 0
-        push(frontier, (0, next(c), source))  # push source to frontier with distance 0
+    push(frontier, (0, next(c), source))  # push source to frontier with distance 0
 
     while frontier:
         (d, _, current_node) = pop(frontier)  # pop a node from frontier
@@ -113,7 +111,7 @@ def UCS(G, sources, paths=None, target=None):
             continue  # already searched this node.
         dist[current_node] = d  # update the shortest distance of current node
 
-        if current_node == target:
+        if current_node in targets:
             break  # we found the shortest path to the target
 
         for neighbor, edge in G_succ[current_node].items():  # for each neighbor of current node
@@ -134,7 +132,7 @@ def UCS(G, sources, paths=None, target=None):
                 if paths is not None:
                     paths[neighbor] = paths[current_node] + [neighbor]  # update the path to neighbor
 
-    return dist
+    return dist, current_node
 
 def Local_beam(G, intial_path):
     paths = []
@@ -294,7 +292,7 @@ def Simulated_annealing(G, sources, paths=None, target=None):
     
     return dist, is_found  # return the distance of the path and whether the target has been found
 
-def BFS(G, sources, paths=None, target=None):
+def BFS(G, source, paths=None, targets=None):
     G_succ = G._adj  # adjacency list of the graph for speed-up (and works for both directed and undirected graphs)
 
     dist = 0  # initialize distance to 0
@@ -302,13 +300,11 @@ def BFS(G, sources, paths=None, target=None):
 
     # frontier is a list with 2-tuples (distance ,node)
     frontier = []  # list for fringe nodes
-    for source in sources:  # for each source node
-        explored_set[source] = 0  # initialize distance to source itself as 0
-        frontier.append((0, source))  # append source to frontier with distance 0
+    frontier.append((0, source))  # append the source to frontier with distance 0
     while frontier:  # while there are nodes in frontier
         (dist, current_node) = frontier.pop(0)  # pop a node from frontier
 
-        if current_node == target:  # if the current node is the target
+        if current_node in targets:  # if the current node is the target
             break  # we found the shortest path to the target
         for neighbor, edge in G_succ[current_node].items():  # for each neighbor of current node
             cost = min(attr.get('length', 1) for attr in edge.values())  # get the cost of the edge
@@ -324,4 +320,61 @@ def BFS(G, sources, paths=None, target=None):
                 if paths is not None:  # if paths need to be recorded
                     paths[neighbor] = paths[current_node] + [neighbor]  # update the path to neighbor
 
-    return dist  # return the shortest distance from the nearest source node to the target node
+    return dist, current_node  # return the shortest distance from the nearest source node to the target node
+
+
+def GSA(G, source, targets, strategy):
+    paths = {}  # dictionary of paths
+    targ = None
+    strategy = strategy.lower()
+    match strategy:
+        case "bfs":
+            paths[source] = [source]
+            _, targ = BFS(G, source, paths, targets)
+        
+        case "ucs":
+            paths[source] = [source]
+            _, targ = UCS(G, source, paths, targets)
+        
+        case "astar":
+            for target in targets:
+                paths[target] = [target]
+            Astar(G, targets, paths=paths, target=source)
+
+        case "simulated annealing":
+            for target in targets:
+                paths[target] = [target]
+            
+            is_found = False
+            while not is_found:
+                _, is_found = Simulated_annealing(G, targets, paths=paths, target=source)
+        
+        case "hill climbing":
+            for target in targets:
+                paths[target] = [target]
+            is_found = False
+            while not is_found:
+                _, is_found = Hill_climbing(G, targets, paths=paths, target=source)
+        
+        case "local beam":
+            for target in targets:
+                paths[target] = [target]
+            is_found = False
+            while not is_found:
+                _, is_found = Hill_climbing(G, targets, paths=paths, target=source)
+            
+            path = paths[source]
+            path = Local_beam(G, path)
+
+            return paths, path
+        
+        case _:
+            raise ValueError("Invalid strategy")
+    
+    if(strategy in ["astar", "hill climbing", "local beam"]):
+        path = paths[source]
+    else:
+        path = paths[targ]
+
+    return paths, path
+
