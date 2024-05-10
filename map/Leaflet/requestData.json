@@ -1,0 +1,8 @@
+{
+    "latitude": 36.73808694789335,
+    "longitude": 3.0102539062500004,
+    "speciality": "Ambulatory Surgery",
+    "special_general": false,
+    "search_strat": "A*",
+    "search_tpe": "optimal"
+}
