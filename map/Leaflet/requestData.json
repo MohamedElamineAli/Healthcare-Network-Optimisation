@@ -1,8 +1,0 @@
-{
-    "latitude": 0,
-    "longitude": 0,
-    "speciality": "Ambulatory Surgery",
-    "special_general": true,
-    "search_strat": "BFS",
-    "search_tpe": "paths"
-}
