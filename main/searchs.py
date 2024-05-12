@@ -17,6 +17,13 @@ def cowl_flew_distance(coordinates, goal_coordinates):
         h = 6371 * c # Radius of the Earth in kilometers
         return h
 
+def uclidian_distance(coordinates, goal_coordinates):
+        # Get latitude and longitude coordinates for each city
+        lat1, lon1 = coordinates
+        lat2, lon2 = goal_coordinates
+        
+        return sqrt((lat1-lat2)**2 + (lon1-lon2)**2)
+
 
 def path_distance(G, path):
     G_succ = G._adj  # adjacency list of the graph for speed-up
@@ -26,6 +33,7 @@ def path_distance(G, path):
         dist += min(attr.get('length', 1) for attr in edge.values())  # add the length of the edge to the distance
     return dist  # return the total distance of the path
 
+
 def path_change(G, path):
     begin = randint(0, len(path)-2)  # randomly select a start index
     end = randint(min(begin+20, len(path)-2), min(begin+40, len(path)-1))  # randomly select an end index
@@ -34,15 +42,17 @@ def path_change(G, path):
         path[begin]: [path[begin]]  # initialize paths with the path from the start node to itself
     }
 
-    UCS(G, [path[begin]], target=path[end], paths=paths)  # find the shortest path from the start node to the end node
+    UCS(G, path[begin], targets=[path[end]], paths=paths)  # find the shortest path from the start node to the end node
     mini_path = paths[path[end]]  # get the shortest path
     new_path = path[:begin] + mini_path + path[end+1:]  # construct the new path
 
     return new_path  # return the new path
 
 
+
+
 def Astar(G, sources, paths=None, target=None):
-    G_succ = G._adj  # adjacency list of the graph for speed-up
+    G_succ = G._pred  # adjacency list of the graph for speed-up
 
     push = heappush  # alias for heappush function
     pop = heappop  # alias for heappop function
@@ -60,7 +70,7 @@ def Astar(G, sources, paths=None, target=None):
 
         data = G.nodes[source]  # get the data of the source node
         cord = (data['x'], data['y'])  # coordinates of the source node
-        h_dist = 1000*cowl_flew_distance(cord, goal_cord)  # calculate heuristic distance from source to target
+        h_dist = 1000*uclidian_distance(cord, goal_cord)  # calculate heuristic distance from source to target
 
         push(frontier, (h_dist, next(c), 0, source))  # push source to frontier with heuristic distance
     while frontier:  # while there are nodes in frontier
@@ -72,7 +82,7 @@ def Astar(G, sources, paths=None, target=None):
             cost = min(attr.get('length', 1) for attr in edge.values())  # get the cost of the edge
             data = G.nodes[neighbor]  # get the data of the neighbor
             cord = (data['x'], data['y'])  # coordinates of the neighbor
-            h_dist = 1000*cowl_flew_distance(cord, goal_cord)  # calculate heuristic distance from neighbor to target
+            h_dist = 1000*uclidian_distance(cord, goal_cord)  # calculate heuristic distance from neighbor to target
 
             if cost is None:
                 continue
@@ -90,6 +100,8 @@ def Astar(G, sources, paths=None, target=None):
 
 
 
+
+
 def UCS(G, source, paths=None, targets=None):
     G_succ = G._adj  # adjacency list of the graph for speed-up
 
@@ -98,9 +110,10 @@ def UCS(G, source, paths=None, targets=None):
     dist = {}  # dictionary of final distances from source to each node
     explored_set = {}  # set of explored nodes
 
-    # fringe is heapq with 3-tuples (distance, c, node)
     # use the count c to avoid comparing nodes (may not be able to)
     c = count()  # counter for nodes
+    
+    # frontier is heapq with 3-tuples (distance, c, node)
     frontier = []  # priority queue
 
     push(frontier, (0, next(c), source))  # push source to frontier with distance 0
@@ -134,11 +147,15 @@ def UCS(G, source, paths=None, targets=None):
 
     return dist, current_node
 
-def Local_beam(G, intial_path):
+
+
+
+
+def Local_beam(G, intial_path, paths_list=None):
     paths = []
     new_paths = []
 
-    for _ in range(20):  # for each iteration
+    for _ in range(10):  # for each iteration
         new_path = path_change(G, intial_path)  # find a better successor path from the initial path
         new_path_length = path_distance(G, new_path)  # calculate the length of the new path
 
@@ -150,8 +167,9 @@ def Local_beam(G, intial_path):
     new_best_path_lenght = 0
 
     tries = 50
+    ap = 50 # used to add some paths after 50 generation
     while tries:  # while not break
-        for i in range(10):  # for each of the first 10 paths
+        for i in range(5):  # for each of the first 10 paths
             for _ in range(2):  # for each iteration
                 new_path = path_change(G, paths[i][1])  # change the path
                 new_path_length = path_distance(G, new_path)  # calculate the length of the new path
@@ -166,41 +184,55 @@ def Local_beam(G, intial_path):
             best_path_length = new_best_path_lenght  # update best_path_length
             tries = 50  # reset tries
 
+        if ap == 0:
+            ap = 1000
+            paths_list.append(paths[0][1])
+        else:
+            ap -= 1
+
     return paths[0][1]  # return the best path
 
 
 
-def Hill_climbing(G, sources, paths=None, target=None):
+
+
+def Hill_climbing(G, source, paths=None, targets=None):
     G_succ = G._adj  # adjacency list of the graph for speed-up
 
     # neighbors is heapq with 3-tuples (huristic cost, distance, node)
-    neighbors = [(float('inf'), 0, 0)]  # initialize neighbors with infinite heuristic cost
-    goal_cord = (G.nodes[target]['x'], G.nodes[target]['y'])  # coordinates of the target node
-    dist = 0  # initialize distance to 0
-    pre_h = float('inf')  # initialize previous heuristic cost to infinity
+    cord = (G.nodes[source]['x'], G.nodes[source]['y'])  # coordinates of the source node
+    dist = 0  # current distance to 0
 
-    for source in sources:
-        data = G.nodes[source]  # get the data of the source node
-        cord = (data['x'], data['y'])  # coordinates of the source node
-        h_dist = 1000*cowl_flew_distance(cord, goal_cord)
-        h_source, _, _ = neighbors[0]  # get the heuristic cost of the first neighbor
-        if h_source > h_dist:  # serch for the source node with the smallest heuristic cost
-            neighbors = [(h_dist, 0, source)]
+    h_target = float('inf')
+    goal_cord = (0, 0)
+    goal = 0
+    for target in targets:
+        data = G.nodes[target]  # get the data of the target node
+        cord = (data['x'], data['y'])  # coordinates of the target node
+        h_dist = 1000*cowl_flew_distance(cord, goal_cord)  # calculate heuristic distance from target to source
+        if h_target > h_dist:  # search for the target node with the smallest heuristic cost
+            h_target = h_dist
+            goal_cord = cord
+            goal = target
 
-    r = 5000  # number of random rounds
-    t = 0  # number of steps in each random round
+    h_dist = 1000*cowl_flew_distance(cord, goal_cord) # calculate heuristic distance from source to target
+    neighbors = [(h_dist, 0, source)]  # initialize neighbors with infinite heuristic cost
+
+    pre_h = float('inf')
+    r = 200  # number of random rounds
+    t = 0  # counter of steps in each random round
     is_found = False  #  indicates whether the target has been found
 
     while neighbors and r > 0:  # while there are neighbors and r > 0
         (cur_h , dist, current_node) = neighbors[0]  # get the heuristic cost, distance, and node of the closest neighbor to the target
 
-        if current_node == target:  # if the current node is the target
+        if current_node == goal:  # if the current node is the target
             is_found = True  # set is_found to True
             break
 
         if cur_h >= pre_h:  # if the current heuristic cost is greater than or equal to the previous heuristic cost
             r -= 1
-            t = 30
+            t = 20
         
         if t > 0: 
             t -= 1 
@@ -227,26 +259,33 @@ def Hill_climbing(G, sources, paths=None, target=None):
         if temp_neighbors:  # if there are neighbors of the current node
             neighbors = sorted(temp_neighbors)  # sort neighbors by heuristic cost
     
-    return dist, is_found  # return the distance and whether the target has been found
+    return dist, is_found, goal  # return the distance and whether the target has been found
 
 
-def Simulated_annealing(G, sources, paths=None, target=None):
+
+
+def Simulated_annealing(G, source, paths=None, targets=None):
     T0 = 10000000000000000000000  # initial temperature
     a = 0.98  # cooling rate
     G_succ = G._adj  # adjacency list of the graph for speed-up
+    cord = (G.nodes[source]['x'], G.nodes[source]['y'])  # coordinates of the source node
+    dist = 0  # current distance to 0
+    last_dist = 0  # previous distance to 0
 
-    neighbors = [(float('inf'), 0, 0)]  # initialize neighbors with infinite heuristic cost
-    goal_cord = (G.nodes[target]['x'], G.nodes[target]['y'])  # coordinates of the target node
-    dist = 0  # initialize distance to 0
-    last_dist = 0  # initialize last distance to 0
+    h_target = float('inf')
+    goal_cord = (0, 0)
+    goal = 0
+    for target in targets:
+        data = G.nodes[target]  # get the data of the target node
+        cord = (data['x'], data['y'])  # coordinates of the target node
+        h_dist = 1000*cowl_flew_distance(cord, goal_cord)  # calculate heuristic distance from target to source
+        if h_target > h_dist:  # search for the target node with the smallest heuristic cost
+            h_target = h_dist
+            goal_cord = cord
+            goal = target
 
-    for source in sources:  # for each source node
-        data = G.nodes[source]  # get the data of the source node
-        cord = (data['x'], data['y'])  # coordinates of the source node
-        h_dist = 1000*cowl_flew_distance(cord, goal_cord)  # calculate heuristic distance from source to target
-        h_source, _, _ = neighbors[0]  # get the heuristic cost of the first neighbor
-        if h_source > h_dist:  # search for the source node with the smallest heuristic cost
-            neighbors = [(h_dist, 0, source)]
+    h_dist = 1000*cowl_flew_distance(cord, goal_cord) # calculate heuristic distance from source to target
+    neighbors = [(h_dist, 0, source)]  # initialize neighbors with infinite heuristic cost
     
     T = T0  # set temperature to initial temperature
     i = -1  # number of iterations
@@ -267,7 +306,7 @@ def Simulated_annealing(G, sources, paths=None, target=None):
 
         last_dist = current_dist  # update last_dist to current_dist
 
-        if current_node == target:
+        if current_node == goal:
             is_found = True  # if the current node is the target node, set is_found to True
             break
         
@@ -290,7 +329,10 @@ def Simulated_annealing(G, sources, paths=None, target=None):
         if temp_neighbors:  # if there are neighbors of the current node
             neighbors = temp_neighbors  # update neighbors with temp_neighbors
     
-    return dist, is_found  # return the distance of the path and whether the target has been found
+    return dist, is_found, goal  # return the distance of the path and whether the target has been found
+
+
+
 
 def BFS(G, source, paths=None, targets=None):
     G_succ = G._adj  # adjacency list of the graph for speed-up (and works for both directed and undirected graphs)
@@ -323,7 +365,33 @@ def BFS(G, source, paths=None, targets=None):
     return dist, current_node  # return the shortest distance from the nearest source node to the target node
 
 
+
+
 def GSA(G, source, targets, strategy):
+    """
+    Executes a search algorithm on a graph from a single source node to multiple target nodes.
+
+    Parameters:
+    ----------
+    G : NetworkX graph
+        The graph on which the search is to be performed.
+    source : int
+        The identifier of the starting node.
+    targets : list
+        A list of goal nodes to be reached.
+    strategy : str
+        The search algorithm to be used. The available strategies are:
+        'bfs' (Breadth-First Search), 'ucs' (Uniform Cost Search), 'astar' (A* Search),
+        'simulated annealing', 'hill climbing', and 'local beam'. The strategy names are case-insensitive.
+
+    Returns:
+    -------
+    tuple
+        A tuple containing two elements:
+        paths (dict): A dictionary where the keys are node identifiers and the values are lists representing the paths explored by the search.
+        path (list): A list representing the solution path.
+    """
+    print("test 17")
     paths = {}  # dictionary of paths
     targ = None
     strategy = strategy.lower()
@@ -342,37 +410,41 @@ def GSA(G, source, targets, strategy):
             Astar(G, targets, paths=paths, target=source)
 
         case "simulated annealing":
-            for target in targets:
-                paths[target] = [target]
+            paths[source] = [source]
             
             is_found = False
             while not is_found:
-                _, is_found = Simulated_annealing(G, targets, paths=paths, target=source)
+                _, is_found, targ = Simulated_annealing(G, source, paths=paths, targets=targets)
         
         case "hill climbing":
-            for target in targets:
-                paths[target] = [target]
+            paths[source] = [source]
+            
             is_found = False
             while not is_found:
-                _, is_found = Hill_climbing(G, targets, paths=paths, target=source)
+                _, is_found, targ = Hill_climbing(G, source, paths=paths, targets=targets)
         
         case "local beam":
-            for target in targets:
-                paths[target] = [target]
+            paths[source] = [source]
+            
             is_found = False
             while not is_found:
-                _, is_found = Hill_climbing(G, targets, paths=paths, target=source)
-            
-            path = paths[source]
-            path = Local_beam(G, path)
+                _, is_found, targ = Hill_climbing(G, source, paths=paths, targets=targets)
+            path = paths[targ]
 
-            return paths, path
+            paths_list = [path] # list of some paths to represent
+            path = Local_beam(G, path, paths_list=paths_list)
+
+            paths_len = int(len(paths_list) / 10)
+            new_paths = [paths_list[i*paths_len] for i in range(9)] # choose 9 paths from paths_list
+            new_paths.append(path) # add the last and the optimal path found
+
+            return new_paths, path
         
         case _:
             raise ValueError("Invalid strategy")
     
-    if(strategy in ["astar", "hill climbing", "local beam"]):
-        path = paths[source]
+    if strategy == "astar":
+        path = paths[source][::-1]  # reverse the path because it is from the target to the source as mentioned in the report
     else:
         path = paths[targ]
 
