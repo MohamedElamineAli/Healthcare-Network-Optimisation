@@ -10,17 +10,23 @@ def route_to_geojson(graph,route):
     return route_edges.__geo_interface__
 
 def paths_to_geojson(graph, paths):
-    # receives a dictionary of {nodeID: [route]} representing the explored set ordered
+    # receives a dictionary of {nodeID: [route]} representing the explored set ordered for graph search
+    # or a list for visualizing local search strategies
     # returns a list of geojson dictionary used for visualization
     geo_list = []
-    fr = True
-    for path in paths.values():
-        if fr:
-            fr = False
-            continue
-        path = path[-2:]
-        gdf = routing.route_to_gdf(graph, path, weight='length')
-        geo_list.append(gdf.__geo_interface__)
+    if isinstance(paths,dict):
+        fr = True
+        for path in paths.values():
+            if fr:
+                fr = False
+                continue
+            path = path[-2:]
+            gdf = routing.route_to_gdf(graph, path, weight='length')
+            geo_list.append(gdf.__geo_interface__)
+    elif isinstance(paths,list):
+        for path in paths:
+            gdf = routing.route_to_gdf(graph, path, weight='length')
+            geo_list.append(gdf.__geo_interface__)
     return geo_list
 
 def is_inside_algiers(point, js):
