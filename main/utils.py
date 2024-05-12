@@ -50,4 +50,45 @@ def is_inside_algiers(point, js):
 
     return False
 
+def getHospitalsfromSpecialities(hospitals, specialities):
+    results = []
+    if specialities == "all":
+        for hospital in hospitals:
+            results.append({"name": hospital["name"], "id": hospital["id"], "c": hospital["x"], "y": hospital["y"]})
+        return results
 
+    for hospital in hospitals:
+        for spc in specialities:
+            if spc in hospital["services"]:
+                results.append({"name": hospital["name"], "id": hospital["id"], "c": hospital["x"], "y": hospital["y"]})
+                break
+
+    return results
+
+
+def search_handler(hospitals, graph, request):
+    lat = request['latitude']
+    long = request['longitude']
+    orig = distance.nearest_node(graph, X=long, Y=lat)
+
+    hosps_dict = getHospitalsfromSpecialities(hospitals, request['speciality'], request['special_treatment'])
+
+    hosps = [h["id"] for h in hosps_dict]
+
+    paths, path = GSA(graph, orig, hosps, request['search_strat'])
+
+    for h in hosps_dict:
+        if h["id"] == path[-1]:
+            cord = (h["c"], h["y"])
+            break
+    
+    paths = paths_to_geojson(graph, paths)
+
+    response = {
+        "start": (lat, long),
+        "end": cord,
+        "paths": paths,
+        "o_path": path
+    }
+
+    return response
