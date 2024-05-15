@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-wR5CE02wB9XkfneD1qKd/EnyUte7Dmvlk8Jbcw2BHw18qrhDJ49UwWbJ1oGjffIiNRgboEYM7AjWLz6aYk9CKg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <title>Document</title>
+  </head>
+
+  <body>
+<!-- clicker -->
+
+<div class="buttons">
+  <a href="#" class="FadeInUp">Click here to choose a place</a>
+</div>
+<div class="overlay">
+  <div class="content">
+    <form >
+      <div id="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+          <fieldset>  
+            <legend><span class="number">1</span> case info</legend>
+            <h3>choose speciality<h3>
+                <select class="speciality">
+                  <option value="1">choose</option>
+              </select>
+           </fieldset>
+              <div style="margin-left: 14px;">
+                <h3 style="margin-top: 0;margin-right: 0;margin-left:0;margin-bottom: -12px;">general ? </h3>
+                <input type="checkbox" id="switch" /><label for="switch">Toggle</label>    
+              </div>
+           <fieldset>  
+            <legend><span class="number">2</span> search info</legend>
+            <div class="dropdown23">
+              <input type="text" id="search-algo" placeholder="Select Search Algorithm" >
+              <div class="dropdown23-content" id="algo-options" value="A*">
+                <a href="#" onclick="selectAlgorithm('bfs')">BFS</a>
+                <a href="#" onclick="selectAlgorithm('ucs')">UCS</a>
+                <a href="#" onclick="selectAlgorithm('astar')">A*</a>
+                <a href="#" onclick="selectAlgorithm('simulated annealing')">Simulated Annealing</a>
+                <a href="#" onclick="selectAlgorithm('hill climbing')">Hill Climbing</a>
+                <a href="#" onclick="selectAlgorithm('local beam')">Local Beam</a>
+              </div>
+              <span class="arrow-down"></span>
+          </div>
+          <div class="optimality" style="margin-top: 20px;">
+            <input type="radio" id="optimal-path" name="visualization" value="optimal" checked>
+            <span>Optimal Path</span>
+            <br>
+            <input type="radio" id="search-visualization" name="visualization" value="paths">
+            <span>Search Visualization</span>
+          </div>
+           </fieldset>
+          <button class="mybtnsp button" >search for the hospital</button>
+         </form>
+  </div>
+</div>
+
+<!-- end of clicker -->
+    <div id="map"></div>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src={{url_for('static', filename='js/hostpital.js')}}></script>
+    <script src={{url_for('static', filename='js/file.js')}}></script>
+    <script src={{url_for('static', filename='js/final.js')}}></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src={{url_for('static', filename='js/app.js')}}></script>
+
+
+  </body>
+</html>
+
+
+
+
+
+
+  
+
