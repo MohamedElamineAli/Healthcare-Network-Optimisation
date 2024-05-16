@@ -149,8 +149,6 @@ def UCS(G, source, paths=None, targets=None):
 
 
 
-
-
 def Local_beam(G, intial_path, paths_list=None):
     paths = []
     new_paths = []
@@ -185,8 +183,8 @@ def Local_beam(G, intial_path, paths_list=None):
 
         paths_list.append(paths[0][1])
 
-
     return paths[0][1]  # return the best path
+
 
 
 
@@ -195,8 +193,8 @@ def Local_beam(G, intial_path, paths_list=None):
 def Hill_climbing(G, source, paths=None, targets=None):
     G_succ = G._adj  # adjacency list of the graph for speed-up
 
-    # neighbors is heapq with 3-tuples (huristic cost, distance, node)
-    cord = (G.nodes[source]['x'], G.nodes[source]['y'])  # coordinates of the source node
+    # neighbors is heapq with 3-tuples (heuristic cost, distance, node)
+    source_cord = (G.nodes[source]['x'], G.nodes[source]['y'])  # coordinates of the source node
     dist = 0  # current distance to 0
 
     h_target = float('inf')
@@ -205,13 +203,13 @@ def Hill_climbing(G, source, paths=None, targets=None):
     for target in targets:
         data = G.nodes[target]  # get the data of the target node
         cord = (data['x'], data['y'])  # coordinates of the target node
-        h_dist = 1000*cowl_flew_distance(cord, goal_cord)  # calculate heuristic distance from target to source
+        h_dist = 1000*cowl_flew_distance(cord, source_cord)  # calculate heuristic distance from target to source
         if h_target > h_dist:  # search for the target node with the smallest heuristic cost
             h_target = h_dist
             goal_cord = cord
             goal = target
 
-    h_dist = 1000*cowl_flew_distance(cord, goal_cord) # calculate heuristic distance from source to target
+    h_dist = 1000*cowl_flew_distance(source_cord, goal_cord) # calculate heuristic distance from source to target
     neighbors = [(h_dist, 0, source)]  # initialize neighbors with infinite heuristic cost
 
     pre_h = float('inf')
@@ -264,7 +262,7 @@ def Simulated_annealing(G, source, paths=None, targets=None):
     T0 = 10000000000000000000000  # initial temperature
     a = 0.98  # cooling rate
     G_succ = G._adj  # adjacency list of the graph for speed-up
-    cord = (G.nodes[source]['x'], G.nodes[source]['y'])  # coordinates of the source node
+    source_cord = (G.nodes[source]['x'], G.nodes[source]['y'])  # coordinates of the source node
     dist = 0  # current distance to 0
     last_dist = 0  # previous distance to 0
 
@@ -274,13 +272,13 @@ def Simulated_annealing(G, source, paths=None, targets=None):
     for target in targets:
         data = G.nodes[target]  # get the data of the target node
         cord = (data['x'], data['y'])  # coordinates of the target node
-        h_dist = 1000*cowl_flew_distance(cord, goal_cord)  # calculate heuristic distance from target to source
+        h_dist = 1000*cowl_flew_distance(cord, source_cord)  # calculate heuristic distance from target to source
         if h_target > h_dist:  # search for the target node with the smallest heuristic cost
             h_target = h_dist
             goal_cord = cord
             goal = target
 
-    h_dist = 1000*cowl_flew_distance(cord, goal_cord) # calculate heuristic distance from source to target
+    h_dist = 1000*cowl_flew_distance(source_cord, goal_cord) # calculate heuristic distance from source to target
     neighbors = [(h_dist, 0, source)]  # initialize neighbors with infinite heuristic cost
     
     T = T0  # set temperature to initial temperature
