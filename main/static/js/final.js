@@ -113,12 +113,12 @@ async function addFeatures() {
       await addFeatureWithDelay(path,2000,false);
       i=i+1
   }
-/*   geojsonStyle2["color"]="#FF5733"
+    geojsonStyle2["color"]="#FF5733"
     for(let path of myLine.paths){
       for (let line of path["features"]) {
         await addFeatureWithDelay(line.geometry,0,false);
       }
-    } */
+    } 
     geojsonStyle2["color"]="#5c00ff";
     for (let line of myLine.o_path["features"]) {
       await addFeatureWithDelay(line.geometry,0);
@@ -196,7 +196,13 @@ const requestData = {
   search_strat:search_type,
   search_tpe:optimal
 };
+//loading here 
 document.querySelector(".overlay").classList.remove("is-on");
+document.querySelector(".container").classList.add("active");
+document.querySelector(".buttons").classList.add("hide");
+document.querySelector(".overlay").classList.add("hide");
+document.querySelector("#map").classList.add("hide");
+document.querySelector("body").style.display="block";
 
 // Make a POST request to your Flask server
 fetch("/main", {
@@ -213,6 +219,12 @@ fetch("/main", {
     // Assuming your Flask app responds with JSON data
     myLine = data;
     if (typeof myLine !== "undefined" && myLine !== null) {
+      //quit loading here
+      document.querySelector(".container").classList.remove("active");
+      document.querySelector(".buttons").classList.remove("hide");
+      document.querySelector(".overlay").classList.remove("hide");
+      document.querySelector("#map").classList.remove("hide");
+      document.querySelector("body").style.display="flex";
       addFeatures();
     } else {
       console.log("NO data");
