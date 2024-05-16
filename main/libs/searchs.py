@@ -167,7 +167,6 @@ def Local_beam(G, intial_path, paths_list=None):
     new_best_path_lenght = 0
 
     tries = 50
-    ap = 50 # used to add some paths after 50 generation
     while tries:  # while not break
         for i in range(5):  # for each of the first 10 paths
             for _ in range(2):  # for each iteration
@@ -184,11 +183,8 @@ def Local_beam(G, intial_path, paths_list=None):
             best_path_length = new_best_path_lenght  # update best_path_length
             tries = 50  # reset tries
 
-        if ap == 0:
-            ap = 1000
-            paths_list.append(paths[0][1])
-        else:
-            ap -= 1
+        paths_list.append(paths[0][1])
+
 
     return paths[0][1]  # return the best path
 
