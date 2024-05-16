@@ -433,7 +433,6 @@ def GSA(G, source, targets, strategy):
 
             paths_list = [path] # list of some paths to represent
             path = Local_beam(G, path, paths_list=paths_list)
-
             paths_len = int(len(paths_list) / 10)
             new_paths = [paths_list[i*paths_len] for i in range(9)] # choose 9 paths from paths_list
             new_paths.append(path) # add the last and the optimal path found

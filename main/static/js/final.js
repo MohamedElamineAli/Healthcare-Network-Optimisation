@@ -103,6 +103,16 @@ async function addFeatures() {
 
 }else{
   //paths visualisation
+  /* let i = 0
+  arr_cols = ["#FF5733","#E85644","#D24E55","#BB4666","#A53D77","#8E3488","#782B99","#6122AA","#4B19BB","#3410CC","#5c00ff"]
+  for(let path of myLine.paths){
+    if(i<10) {geojsonStyle2["color"]=arr_cols[i];
+      console.log(i)
+      console.log(geojsonStyle2["color"])
+    }
+      await addFeatureWithDelay(path,2000,false);
+      i=i+1
+  } */
   geojsonStyle2["color"]="#FF5733"
     for(let path of myLine.paths){
       for (let line of path["features"]) {

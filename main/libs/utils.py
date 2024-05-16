@@ -11,7 +11,7 @@ def route_to_geojson(graph,route):
     return route_edges.__geo_interface__
 
 
-def paths_to_geojson(graph, paths):
+def paths_to_geojson(graph, paths, astar=False):
     # receives a dictionary of {nodeID: [route]} representing the explored set ordered for graph search
     # or a list for visualizing local search strategies
     # returns a list of geojson dictionary used for visualization
@@ -21,9 +21,12 @@ def paths_to_geojson(graph, paths):
         for path in paths.values():
             if len(path) == 1:
                 continue
-            path = path[-2:]
-            if path.__contains__(2273311835):
-                print(path)
+            if astar:
+                path = path[:2]
+            else:
+                path = path[-2:]
+            #if path.__contains__(2273311835):
+                #print(path)
             gdf = routing.route_to_gdf(graph, path, weight='length')
             geo_list.append(gdf.__geo_interface__)
     elif isinstance(paths, list):
@@ -77,6 +80,7 @@ def search_handler(hospitals, graph, request):
     lat = request['latitude']
     long = request['longitude']
     orig = distance.nearest_nodes(graph, X=long, Y=lat)
+    print(orig)
 
     hosps_dict = getHospitalsfromSpecialities(hospitals, [request['speciality']], general=request['special_general'])
 
@@ -94,8 +98,7 @@ def search_handler(hospitals, graph, request):
     route = route_to_geojson(graph, path)
     vis_paths = None
     if request["search_tpe"] == "paths":
-        vis_paths = paths_to_geojson(graph, paths)
-
+        vis_paths = paths_to_geojson(graph, paths, astar=True)
     response = {
         "start": (lat, long),
         "end": cord,

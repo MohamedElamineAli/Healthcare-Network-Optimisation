@@ -61,7 +61,6 @@ def f_main():
     if request.method == 'POST':
         #try:
             # Retrieve data from the request
-            print(graph[2273311835])
             request_data = request.json
             data = utils.search_handler(hospitals=hospitals["hospitals"], graph=graph, request=request_data)
             return jsonify(data)
