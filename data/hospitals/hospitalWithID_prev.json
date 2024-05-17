@@ -1,0 +1,595 @@
+{
+    "hospitals": [
+        {
+            "name": "CHU Bab El Oued",
+            "y": 36.79490011268442,
+            "x": 3.0492491503591346,
+            "services": [
+                "General Emergency",
+                "Anatomical Pathology",
+                "Biochemistry",
+                "General Surgery",
+                "Dermatologist",
+                "Diabetologist",
+                "Endocrinologist",
+                "Epidemiologist",
+                "Gastroenterologist",
+                "Obstetrics and Gynecology",
+                "Hematologist",
+                "Internal Medicine",
+                "Forensic Medicine",
+                "Occupational Medicine",
+                "Nuclear Medicine",
+                "Neurosurgeon",
+                "Neurologist",
+                "Nephrologist",
+                "Ophthalmologist",
+                "Orthopedics",
+                "Otorhinolaryngology",
+                "Pediatrics",
+                "Pharmacology",
+                "Psychiatry",
+                "Pulmonologist",
+                "Radiologist",
+                "Intensive Care",
+                "Rheumatologist",
+                "Traumatologist",
+                "Medical and Surgical Emergencies"
+            ],
+            "id": 4304916632
+        },
+        {
+            "name": "CHU Mustapha Bacha",
+            "y": 36.76286921267321,
+            "x": 3.0530770772336724,
+            "services": [
+                "General Emergency",
+                "Anatomical Pathology",
+                "Anesthesiology - Intensive Care",
+                "Cardiologist",
+                "General Surgery",
+                "Maxillofacial Surgery",
+                "Pediatric Surgery",
+                "Orthopedic Surgery",
+                "Thoracic Surgery",
+                "Dermatologist",
+                "Epidemiologist",
+                "Gastroenterologist",
+                "Obstetrics and Gynecology",
+                "Hematologist",
+                "Forensic Medicine",
+                "Occupational Medicine",
+                "Microbiologist",
+                "Neonatologist",
+                "Neurologist",
+                "Neurosurgery",
+                "Ophthalmologist",
+                "Otorhinolaryngology",
+                "Pediatrics",
+                "Pulmonologist",
+                "Psychiatry",
+                "Radiologist",
+                "Rehabilitation Medicine"
+            ],
+            "id": 4829699788
+        },
+        {
+            "name": "CHU Beni Messous",
+            "y": 36.77917356254938,
+            "x": 2.981604787906015,
+            "services": [
+                "General Emergency",
+                "Pneumo-Allergologist",
+                "Rheumatologist",
+                "Intensive Care",
+                "Radiologist",
+                "Pulmonologist",
+                "Pneumologist",
+                "Pneumo-Phthisiologist",
+                "Pediatrics",
+                "Otorhinolaryngology",
+                "Ophthalmologist",
+                "Nephrologist",
+                "Microbiologist",
+                "Occupational Medicine",
+                "Forensic Medicine",
+                "Internal Medicine",
+                "Hematologist",
+                "Obstetrics and Gynecology",
+                "Epidemiologist",
+                "General Surgery",
+                "Pediatric Surgery",
+                "Cardiologist",
+                "Anatomical Pathology"
+            ],
+            "id": 2273317421
+        },
+        {
+            "name": "CHU Nefissa Hamoud",
+            "y": 36.736726558370584,
+            "x": 3.105669747387789,
+            "services": [
+                "General Emergency",
+                "Radiologist",
+                "Physiologist",
+                "Pediatrics",
+                "Parasitologist",
+                "Ophthalmologist",
+                "Nephrologist",
+                "Forensic Medicine",
+                "Histologist",
+                "Obstetrics and Gynecology",
+                "Epidemiologist",
+                "Pediatric Surgery",
+                "Cardiologist",
+                "Anatomical Pathology"
+            ],
+            "id": 2256418890
+        },
+        {
+            "name": "CHU Kouba",
+            "y": 36.72629486001321,
+            "x": 3.087007014099288,
+            "services": [
+                "General Emergency",
+                "Radiologist",
+                "Otorhinolaryngology",
+                "Forensic Medicine",
+                "Internal Medicine",
+                "Obstetrics and Gynecology",
+                "General Surgery",
+                "Anesthesiology - Intensive Care"
+            ],
+            "id": 2270074885
+        },
+        {
+            "name": "EHS Ben Aknoun",
+            "y": 36.75490225676068,
+            "x": 3.0010046815497216,
+            "services": [
+                "General Emergency",
+                "Traumatologist",
+                "Rheumatologist",
+                "Functional Rehabilitation and Readaptation",
+                "Orthopedics",
+                "Phthisiologist",
+                "Neurologist"
+            ],
+            "id": 2260932042
+        },
+        {
+            "name": "EPH Zeralda",
+            "y": 36.70100985998786,
+            "x": 2.8430954802807915,
+            "services": [
+                "General Emergency",
+                "Dental Surgery",
+                "Pediatrics",
+                "Microbiologist",
+                "Internal Medicine",
+                "Obstetrics and Gynecology",
+                "General Surgery"
+            ],
+            "id": 975658312
+        },
+        {
+            "name": "Zeralda Burn Center Hospital",
+            "y": 36.69849449794971,
+            "x": 2.8446292368432546,
+            "services": [
+                "General Emergency",
+                "Burn Surgery",
+                "Plastic Reconstructive Surgery",
+                "Radiologist"
+            ],
+            "id": 11209027607
+        },
+        {
+            "name": "Ali Ait Idir Neurosurgery Hospital",
+            "y": 36.79488020673856,
+            "x": 3.0581677055150216,
+            "services": [
+                "General Emergency",
+                "Radiologist",
+                "Neurophysiologist",
+                "Neurologist",
+                "Neurosurgeon"
+            ],
+            "id": 9189803291
+        },
+        {
+            "name": "CNMS Hospital",
+            "y": 36.76893131184527,
+            "x": 3.0002898035842662,
+            "services": [
+                "General Emergency",
+                "Anesthesiology - Intensive Care",
+                "Cardiologist",
+                "Cardiac Surgery",
+                "Vascular Surgery",
+                "Sports Medicine",
+                "Physiologist"
+            ],
+            "id": 288363950
+        },
+        {
+            "name": "Salim Zemirli Hopital",
+            "y": 36.703639213640294,
+            "x": 3.1236933680609926,
+            "services": [
+                "General Emergency",
+                "Medical and Surgical Emergencies",
+                "Orthopedics",
+                "Neurosurgeon",
+                "Forensic Medicine",
+                "Internal Medicine",
+                "General Surgery",
+                "Anesthesiology - Intensive Care"
+            ],
+            "id": 529957619
+        },
+        {
+            "name": "EPSP Gue de Constantine",
+            "y": 36.702004407587545,
+            "x": 3.061950728836447,
+            "services": [
+                "Gynecologist"
+            ],
+            "id": 288389172
+        },
+        {
+            "name": "EPH Ain Taya",
+            "y": 36.78937724075757,
+            "x": 3.2946449157760407,
+            "services": [
+                "General Emergency",
+                "Obstetrics and Gynecology",
+                "Medical Emergencies",
+                "Radiologist",
+                "Pediatrics",
+                "Internal Medicine",
+                "General Surgery"
+            ],
+            "id": 1234966638
+        },
+        {
+            "name": "Birtraria Hospital",
+            "y": 36.773876144811226,
+            "x": 3.040191082862231,
+            "services": [
+                "General Emergency",
+                "Neurophysiologist",
+                "General Surgery",
+                "Pediatric Surgery",
+                "Internal Medicine",
+                "Pediatrics"
+            ],
+            "id": 11290169454
+        },
+        {
+            "name": "El Kettar",
+            "y": 36.78554033494874,
+            "x": 3.051988596900854,
+            "services": [
+                "General Emergency",
+                "Medical Emergencies",
+                "Radiologist",
+                "Microbiologist",
+                "Infectious Diseases"
+            ],
+            "id": 7324544879
+        },
+        {
+            "name": "Douera CHU",
+            "y": 36.6663691171166,
+            "x": 2.943100005962378,
+            "services": [
+                "General Emergency",
+                "Orthopedics",
+                "Physical Medicine",
+                "Rehabilitation Medicine",
+                "Rheumatology",
+                "Plastic Reconstructive Surgery",
+                "Anatomical Pathology",
+                "General Surgery",
+                "Internal Medicine",
+                "Cardiologist",
+                "Maxillofacial Surgery",
+                "Pediatrics",
+                "Radiology",
+                "Biology Laboratory",
+                "Forensic Medicine",
+                "Obstetrics and Gynecology"
+            ],
+            "id": 3042228872
+        },
+        {
+            "name": "EPH Rouiba",
+            "y": 36.735306369754845,
+            "x": 3.2857465118265305,
+            "services": [
+                "General Emergency",
+                "Surgery Department",
+                "Radiology Department",
+                "Pulmonology Department",
+                "Oncology Department",
+                "Internal Medicine Department",
+                "Pediatrics Department",
+                "University Department of Occupational Medicine (UDOMT)"
+            ],
+            "id": 3252608885
+        },
+        {
+            "name": "Clinique m\u00c3\u00a9dico-diagnostic du val",
+            "y": 36.75832311058592,
+            "x": 3.025324410074536,
+            "services": [
+                "Otorhinolaryngology",
+                "Orthopedics",
+                "Urologist",
+                "Cardiologist",
+                "Pediatrics",
+                "Gastroenterologist",
+                "Internal Medicine",
+                "Hematologist",
+                "Dermatologist",
+                "Endocrinologist",
+                "Diabetologist",
+                "Neurologist",
+                "General Medicine",
+                "Biochemistry",
+                "Nurse",
+                "Occupational Medicine",
+                "Radiologist",
+                "Pneumo-Allergologist",
+                "Gynecologist",
+                "Medical Imaging",
+                "Rheumatologist",
+                "Senologist"
+            ],
+            "id": 4412784750
+        },
+        {
+            "name": "Al Azhar Clinic",
+            "y": 36.76270615677765,
+            "x": 2.982452565522724,
+            "services": [
+                "General Surgery",
+                "Ophthalmologist",
+                "Otorhinolaryngology",
+                "Orthopedics",
+                "Urologist",
+                "Pediatrics",
+                "Dermatologist",
+                "Hemodialysis",
+                "Rheumatologist",
+                "Anesthesia",
+                "Anesthesiology - Intensive Care",
+                "Biologist",
+                "Pediatric Cardiology",
+                "Ambulatory Surgery",
+                "Pediatric Surgery",
+                "Diabetologist",
+                "Endocrinologist",
+                "Gastroenterologist",
+                "Gynecologist",
+                "Physiotherapy",
+                "Internal Medicine",
+                "Nephrologist",
+                "Neurologist",
+                "Radiologist",
+                "Medical and Surgical Emergencies"
+            ],
+            "id": 2844168735
+        },
+        {
+            "name": "Chahrazed Clinic",
+            "y": 36.761204686467316,
+            "x": 2.9504615834091967,
+            "services": [
+                "Otorhinolaryngology",
+                "Neurosurgeon",
+                "Urologist",
+                "Cardiologist",
+                "Internal Medicine",
+                "Dermatologist",
+                "Aesthetic Surgery",
+                "Thoracic Surgery",
+                "Orthopedic Surgery",
+                "Vascular Surgery",
+                "Radiologist",
+                "Pediatric Surgery",
+                "Anesthesiology - Intensive Care",
+                "Gynecologist"
+            ],
+            "id": 393042221
+        },
+        {
+            "name": "Medical Clinic Aya",
+            "y": 36.7063990720909,
+            "x": 3.0664136331682172,
+            "services": [
+                "General Surgery",
+                "Pediatric Surgery",
+                "Maxillofacial Surgery",
+                "Ophthalmologist",
+                "Otorhinolaryngology",
+                "Orthopedics",
+                "Neurosurgery",
+                "Urologist",
+                "Laparoscopic Surgeon",
+                "Medical Imaging"
+            ],
+            "id": 2302578003
+        },
+        {
+            "name": "Diar Saada Clinic",
+            "y": 36.74352456950984,
+            "x": 3.059383283408449,
+            "services": [
+                "General Surgery",
+                "Ophthalmologist",
+                "Orthopedics",
+                "Obstetrics and Gynecology",
+                "Cardiovascular Surgery"
+            ],
+            "id": 319610755
+        },
+        {
+            "name": "Chifa Clinic Hydra",
+            "y": 36.7449805244412,
+            "x": 3.023652866061225,
+            "services": [
+                "General Surgery",
+                "Maxillofacial Surgery",
+                "Ophthalmologist",
+                "Otorhinolaryngology",
+                "Orthopedics",
+                "Neurosurgery",
+                "Urologist",
+                "Cardiologist",
+                "Cardiac Surgery",
+                "Dermatologist",
+                "Endocrinologist",
+                "Aesthetic Surgery",
+                "Diabetologist",
+                "Radiologist",
+                "Oncologist",
+                "Neonatologist"
+            ],
+            "id": 7345382551
+        },
+        {
+            "name": "Abdat Medical Diagnostic Center",
+            "y": 36.73522375588742,
+            "x": 3.0633419965828375,
+            "services": [
+                "Bacteriologist",
+                "Biochemistry",
+                "Clinical Biology",
+                "Cardiologist",
+                "Pediatric Cardiology",
+                "Diabetologist",
+                "Endocrinologist",
+                "Hematologist",
+                "Medical Imaging",
+                "Immunologist",
+                "Nurse Anesthetist",
+                "Nurse",
+                "General Medicine",
+                "Nuclear Medicine",
+                "Microbiologist",
+                "Parasitologist",
+                "Radiologist",
+                "General Practitioner"
+            ],
+            "id": 327429489
+        },
+        {
+            "name": "CMS El Achour",
+            "y": 36.74412861694628,
+            "x": 2.9931919298364726,
+            "services": [
+                "Pediatric Surgery",
+                "Ophthalmologist",
+                "Otorhinolaryngology",
+                "Orthopedics",
+                "Urologist",
+                "Cardiologist",
+                "Gastroenterologist",
+                "Internal Medicine",
+                "Endocrinologist",
+                "Aesthetic Surgery",
+                "Diabetologist",
+                "General Medicine",
+                "Allergist",
+                "Orthopedic Surgery",
+                "Endoscopy",
+                "Ambulatory Surgery",
+                "Plastic Reconstructive Surgery",
+                "Urological Surgery",
+                "Pneumo-Allergologist",
+                "Gynecologist",
+                "Rheumatologist"
+            ],
+            "id": 2719105958
+        },
+        {
+            "name": "Ben Omar Clinic",
+            "y": 36.72812859897092,
+            "x": 3.088741,
+            "services": [
+                "Diabetologist",
+                "Bacteriologist",
+                "Biochemistry",
+                "Cardiologist",
+                "Endocrinologist",
+                "Hematologist"
+            ],
+            "id": 326639665
+        },
+        {
+            "name": "Ennahda Clinic",
+            "y": 36.73438663155472,
+            "x": 3.0498898,
+            "services": [
+                "General Surgery",
+                "Otorhinolaryngology",
+                "Orthopedics",
+                "Obstetrics and Gynecology",
+                "Neurosurgery",
+                "Pediatrics",
+                "Laparoscopic Surgeon",
+                "Aesthetic Surgery"
+            ],
+            "id": 3803252375
+        },
+        {
+            "name": "Diagnosis Cneter El Makria",
+            "y": 36.732882374544005,
+            "x": 3.112004290985847,
+            "services": [
+                "Otorhinolaryngology",
+                "Neurosurgeon",
+                "Cardiologist",
+                "Pediatrics",
+                "Gastroenterologist",
+                "Internal Medicine",
+                "Neurologist"
+            ],
+            "id": 316891904
+        },
+        {
+            "name": "Clinic Nour Aures",
+            "y": 36.648610589960796,
+            "x": 3.0026886628915346,
+            "services": [
+                "Interventional Radiology",
+                "Diagnostic Radiology",
+                "Gastroenterology",
+                "Pathology",
+                "Laboratory"
+            ],
+            "id": 7730783103
+        },
+        {
+            "name": "Dental surgery practice of Dr. Rarrbo h",
+            "y": 36.67035297914269,
+            "x": 3.1112496484378456,
+            "services": [
+                "Dental Surgery"
+            ],
+            "id": 829084570
+        },
+        {
+            "name": "Dermatologist Dr Benali",
+            "y": 36.69939501166392,
+            "x": 2.9777537946209383,
+            "services": [
+                "Venereal Diseases",
+                "Dermatological Surgery"
+            ],
+            "id": 1436033491
+        }
+    ]
+}
