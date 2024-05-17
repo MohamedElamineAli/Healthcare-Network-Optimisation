@@ -44,16 +44,8 @@ def bound_checking():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        try:
-            # Retrieve data from the request
-            request_data = request.json
-            data = utils.search_handler(hospitals=hospitals, graph=graph, request=request_data)
-            return jsonify(data)
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
-    else:
-        return render_template('index.html')
+
+    return render_template('index.html')
 
 
 @app.route('/main', methods=['POST'])

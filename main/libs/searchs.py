@@ -21,7 +21,6 @@ def uclidian_distance(coordinates, goal_coordinates):
         # Get latitude and longitude coordinates for each city
         lat1, lon1 = coordinates
         lat2, lon2 = goal_coordinates
-        
         return sqrt((lat1-lat2)**2 + (lon1-lon2)**2)
 
 
@@ -70,7 +69,7 @@ def Astar(G, sources, paths=None, target=None):
 
         data = G.nodes[source]  # get the data of the source node
         cord = (data['x'], data['y'])  # coordinates of the source node
-        h_dist = 1000*uclidian_distance(cord, goal_cord)  # calculate heuristic distance from source to target
+        h_dist = 1000*cowl_flew_distance(cord, goal_cord)  # calculate heuristic distance from source to target
 
         push(frontier, (h_dist, next(c), 0, source))  # push source to frontier with heuristic distance
     while frontier:  # while there are nodes in frontier
@@ -82,7 +81,7 @@ def Astar(G, sources, paths=None, target=None):
             cost = min(attr.get('length', 1) for attr in edge.values())  # get the cost of the edge
             data = G.nodes[neighbor]  # get the data of the neighbor
             cord = (data['x'], data['y'])  # coordinates of the neighbor
-            h_dist = 1000*uclidian_distance(cord, goal_cord)  # calculate heuristic distance from neighbor to target
+            h_dist = 1000*cowl_flew_distance(cord, goal_cord)  # calculate heuristic distance from neighbor to target
 
             if cost is None:
                 continue

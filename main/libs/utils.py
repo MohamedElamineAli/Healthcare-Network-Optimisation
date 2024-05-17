@@ -98,12 +98,13 @@ def search_handler(hospitals, graph, request):
     route = route_to_geojson(graph, path)
     vis_paths = None
     if request["search_tpe"] == "paths":
-        vis_paths = paths_to_geojson(graph, paths, astar=True)
+        vis_paths = paths_to_geojson(graph, paths, astar=request["search_strat"] == "astar")
     response = {
         "start": (lat, long),
         "end": cord,
         "paths": vis_paths,
-        "o_path": route
+        "o_path": route,
+        "vis_type": "local search" if request["search_strat"] == "local beam" else "graph search"
     }
 
     return response
