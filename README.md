@@ -1,67 +1,108 @@
-# Setting up the environment
-This guide will help you set up an Anaconda environment using the `environment.yaml` file provided in this repository.
+# Healthcare Network Optimisation
 
-## Prerequisites
 
-Before you begin, make sure you have Anaconda installed on your system. If not, you can download and install Anaconda from the [official Anaconda website](https://www.anaconda.com/download).
 
-## Installation Steps
-### Using Command Line (Anaconda Prompt)
+## Installation
+
+### Prerequisites
+
+- Python 3.x installed on your system. You can download it from [python.org](https://www.python.org/downloads/).
+
+### Windows
+
 1. **Clone the Repository:**
 
-    Clone this repository to your local machine using the following command:
-    
-    ```bash
+    Open Command Prompt and navigate to the directory where you want to clone the project, then run:
+    ```sh
     git clone https://github.com/MohamedElamineAli/Healthcare-Network-Optimisation
-    ```
-
-2. **Navigate to the Repository Directory:**
-
-    Use the `cd` command to navigate to the directory where you cloned the repository:
-    
-    ```bash
     cd Healthcare-Network-Optimisation
     ```
 
-3. **Create Anaconda Environment:**
+2. **Create a Virtual Environment:**
 
-    Use the `conda env create` command to create a new Anaconda environment from the `environment.yaml` file:
-    
-    ```bash
-    conda env create -f environment.yaml
+    ```sh
+    python -m venv venv
     ```
 
-4. **Activate the Environment:**
+3. **Activate the Virtual Environment:**
 
-    Activate the newly created Anaconda environment using the following command:
-    
-    ```bash
-    conda activate <environment-name>
-    ```
-### Using Anaconda Navigator (Graphical Interface)
-1. **Launch Anaconda Navigator:**
-
-    Open Anaconda Navigator from your system's application menu.
-
-2. **Import Environment from YAML File:**
-
-    - Click on the "Import" button under the "Environments" tab.
-    - Browse and select the `environment.yaml` file from the cloned repository.
-    - Click "Open" to import the environment.
-
-3. **Activate the Environment:**
-    - Once imported, find the newly created environment in the list.
-    - Click on the environment name to activate it
-
-## Additional Notes
-- Remember to deactivate the environment when you're finished using it:
-  
-    ```bash
-    conda deactivate
+    ```sh
+    venv\Scripts\activate
     ```
 
-- For more information on managing Anaconda environments, refer to the [official Anaconda documentation](https://docs.anaconda.com/).
+4. **Install Dependencies:**
 
-## Feedback and Contributions
+    ```sh
+    pip install -r requirements.txt
+    ```
 
-If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request on GitHub.
+### macOS
+
+1. **Clone the Repository:**
+
+    Open Terminal and navigate to the directory where you want to clone the project, then run:
+    ```sh
+    git clone https://github.com/MohamedElamineAli/Healthcare-Network-Optimisation
+    cd Healthcare-Network-Optimisation
+    ```
+
+2. **Create a Virtual Environment:**
+
+    ```sh
+    python3 -m venv venv
+    ```
+
+3. **Activate the Virtual Environment:**
+
+    ```sh
+    source venv/bin/activate
+    ```
+
+4. **Install Dependencies:**
+
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+### Linux
+
+1. **Clone the Repository:**
+
+    Open Terminal and navigate to the directory where you want to clone the project, then run:
+    ```sh
+    git clone https://github.com/MohamedElamineAli/Healthcare-Network-Optimisation
+    cd Healthcare-Network-Optimisation
+    ```
+
+2. **Create a Virtual Environment:**
+
+    ```sh
+    python3 -m venv venv
+    ```
+
+3. **Activate the Virtual Environment:**
+
+    ```sh
+    source venv/bin/activate
+    ```
+
+4. **Install Dependencies:**
+
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+## Usage
+
+With the virtual environment activated, you can run the program:
+
+```sh
+cd main
+python app.py
+```
+## Deactivating the virtual environment
+To deactivate the virtual environment, simply run:
+```sh
+deactivate
+```
+
