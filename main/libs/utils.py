@@ -76,29 +76,30 @@ def getHospitalsfromSpecialities(hospitals, specialities, general=False):
 
 
 def search_handler(hospitals, graph, request):
-    print(request)
     lat = request['latitude']
     long = request['longitude']
     orig = distance.nearest_nodes(graph, X=long, Y=lat)
-    print(orig)
-
     hosps_dict = getHospitalsfromSpecialities(hospitals, [request['speciality']], general=request['special_general'])
-
     hosps = [h["id"] for h in hosps_dict]
-    frfr= [h["name"] for h in hosps_dict]
+    hosps_name = [h["name"] for h in hosps_dict]
     print("origin node: ", orig)
-    print("names of hospitals to search: ", frfr)
-    print("ids of hospitals to search: ", hosps)
+    print("names of hospitals to search: ", hosps_name)
+    print("searching for a path")
     paths, path = searchs.GSA(graph, orig, hosps, request['search_strat'])
-    print("the path ", path[0], path[-3:])
+    if paths is None and path is None:
+        print("search failed")
+        return
+    print("search terminated")
+    print("generating visualization")
     for h in hosps_dict:
         if h["id"] == path[-1]:
             cord = (h["x"], h["y"])
             break
     route = route_to_geojson(graph, path)
     vis_paths = None
-    if request["search_tpe"] == "paths":
+    if request["search_tpe"] == "paths" and request['speciality'] not in ["simulated annealing", "hill climbing"]:
         vis_paths = paths_to_geojson(graph, paths, astar=request["search_strat"] == "astar")
+    print("visualization generated")
     response = {
         "start": (lat, long),
         "end": cord,

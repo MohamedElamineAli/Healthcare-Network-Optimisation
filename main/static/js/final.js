@@ -245,3 +245,7 @@ function getCheckedRadioButton() {
   }
   return null;
 }
+
+document.querySelector('form').addEventListener("submit",(e)=>{
+  e.preventDefault()
+})
