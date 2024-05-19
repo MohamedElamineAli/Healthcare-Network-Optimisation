@@ -88,7 +88,14 @@ def search_handler(hospitals, graph, request):
     paths, path = searchs.GSA(graph, orig, hosps, request['search_strat'])
     if paths is None and path is None:
         print("search failed")
-        return
+        res = {
+            "start": (lat, long),
+            "end": cord,
+            "paths": None,
+            "o_path": None,
+            "vis_type": None
+        }
+        return res
     print("search terminated")
     print("generating visualization")
     for h in hosps_dict:
