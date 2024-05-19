@@ -91,8 +91,9 @@ async function addFeatures() {
     map.removeLayer(currentPathLayer); 
     map.removeLayer(Old_start_marker);
   }
-  if (myLine.o_path==null) {
+  if (myLine.o_path == null) {
     alert("No path exist inside this area");
+    map.removeLayer(marker);
     return;
   }
   let newPathLayerGroup = L.layerGroup(); // for the new path
